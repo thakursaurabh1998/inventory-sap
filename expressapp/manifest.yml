@@ -1,0 +1,5 @@
+---
+applications:
+- name: express-blockchain
+  memory: 128M
+  instances: 1

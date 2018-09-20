@@ -1,0 +1,54 @@
+body {
+	background-color: #c5cae9;
+}
+
+.buy-now-page {
+	align-content: center;
+}
+
+.form {
+	box-shadow: 10px 10px 50px grey;
+	background-color: white;
+	width: 100vh;
+	padding: 10vh;
+	height: 70vh;
+}
+
+.header {
+	height: 80px;
+	background-color: #fafafa;
+	padding-bottom: 8px;
+	margin-top: 10px;
+	font-family: 'Courgette', cursive;
+	color: #424242 ;
+	text-align: center;
+}
+
+.nav-bar {
+	margin-bottom: 8px;
+	margin-top: 5px;
+	background-color: #e0e0e0;
+	height: 40px;
+}
+
+.item {
+	margin-top: 15px;
+}
+
+.image {
+  	height: 250px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.card-style {
+	width: 340px;
+	height: 450px;
+}
+
+.title {
+	font-size: 5vh;
+	font-family: sans-serif;
+	color: #424242 ;
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        table {
+            margin-top: 20px;
+        }
+    </style>
+    <title>Dashboard (Admin)</title>
+</head>
+
+<body>
+    <nav style="background-color: black">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo center">Admin Dashboard</a>
+        </div>
+    </nav>
+    <div id="flash"></div>
+
+    <div>
+        <span id="dataTable" align="left-align"></span>
+        <span id="filterTable"></span>
+    </div>
+    <script>
+        var count = 0;
+        var data;
+        var headers = {
+        	"Content-type": "application/json"
+        };
+        fetch(`https://express-blockchain.cfapps.eu10.hana.ondemand.com/products`, { headers }).then(i => i.json()).then(i=> {
+        	data = i;
+        	$('#dataTable').html(createTable(data));
+	        $('#filterTable').toggle();
+        	$('#filter').click(() => {
+	            var filteredArray = new Array();
+	            var array = new Array();
+	            for (var i in data) {
+	                if (data[i].quantity <= 5) {
+	                    filteredArray.push(data[i]);
+	                } else {
+	                    array.push(data[i]);
+	                }
+	            }
+	            $('#filterTable').toggle();
+	            $('#filterTable').html('<h3 class="center-align">Depleting Stocks</h3>' + createTable(filteredArray));
+	            $('#dataTable').html(createTable(array));
+	            $('#filter').hide();
+	            $('#flash').hide();
+	        });
+        });
+        // var data = [
+        //     {
+        //         productId: 1,
+        //         productName: "Geyser",
+        //         quantity: 34
+        //     },
+        //     {
+        //         productId: 2,
+        //         productName: "AC",
+        //         quantity: 3
+        //     },
+        //     {
+        //         productId: 3,
+        //         productName: "Chimney",
+        //         quantity: 43
+        //     },
+        //     {
+        //         productId: 4,
+        //         productName: "Wardrobe",
+        //         quantity: 10
+        //     }
+        // ];
+        function createTable(data) {
+            var rows = '<table align="center" class="striped" style="max-width:700px">';
+            rows += '<thead>';
+            rows += '<tr>';
+            rows += '<th>ID</th>';
+            rows += '<th>Name</th>';
+            rows += '<th>Quantity</th>';
+            rows += '</tr>';
+            rows += '</thead>';
+            rows += '<tbody>';
+
+            for (var i in data) {
+                var recordId = data[i].productId;
+                rows += '<tr id="' + recordId + '">';
+                rows += '<td>' + recordId + '</td>';
+                rows += '<td><span class="name">' + data[i].productName + '</span></td>';
+                rows += '<td>' + data[i].quantity;
+                if (data[i].quantity <= 5) {
+                    rows += '&emsp;&emsp;&emsp;<span><i class="tiny material-icons" style="color: red">warning</i></span>&emsp;'+'<span style="color:red">Stocks less</span>';
+                    count++;
+                    if (count === 1) {
+                        var flashMessage = '<table align="center" class="highlight" style="max-width:700px"><tr><td class="center-align"><strong>Stocks Depleting! You can check here </strong><span id="filter"><a class="waves-effect waves-light btn">Filter</a></span></td></tr> </table>'
+                        $('#flash').html(flashMessage);
+                    }
+                }
+                rows += '</td>';
+                rows += '</tr>';
+            }//end for
+
+            rows += '</tbody>';
+            rows += '</table>';
+            return rows;
+        }
+        
+        
+
+    </script>
+</body>
+
+</html>

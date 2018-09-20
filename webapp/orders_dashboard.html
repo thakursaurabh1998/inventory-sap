@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        table {
+            margin-top: 4%;
+        }
+    </style>
+    <title>Dashboard (Orders)</title>
+</head>
+
+<body>
+    <nav style="background-color: black">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo center">Order List</a>
+        </div>
+    </nav>
+
+    <div>
+        <span id="dataTable" align="left-align"></span>
+    </div>
+    <script>
+    	var data;
+        var headers = {
+        	"Content-type": "application/json"
+        };
+        fetch(`https://express-blockchain.cfapps.eu10.hana.ondemand.com/order`, { headers }).then(i => i.json()).then(i=> {
+        	data = i;
+        	$('#dataTable').html(createTable(data));
+        });
+        // var data = [
+        //     {
+        //         productId: 1,
+        //         productName: "Geyser",
+        //         quantity: 34,
+        //         deliveryAddress: "jnsaqamka"
+        //     },
+        //     {
+        //         productId: 2,
+        //         productName: "AC",
+        //         quantity: 3,
+        //         deliveryAddress: "jnsaqamka"
+        //     },
+        //     {
+        //         productId: 3,
+        //         productName: "Chimney",
+        //         quantity: 43,
+        //         deliveryAddress: "jnsaqamka"
+        //     },
+        //     {
+        //         productId: 4,
+        //         productName: "Wardrobe",
+        //         quantity: 10,
+        //         deliveryAddress: "jnsaqamka"
+        //     }
+        // ];
+        function createTable(data) {
+            var rows = '<table align="center" class="striped" style="max-width:900px">';
+            rows += '<thead>';
+            rows += '<tr>';
+            rows += '<th>KEY</th>';
+            rows += '<th>Name</th>';
+            rows += '<th>Contact</th>';
+            rows += '<th>Delivery Address</th>'
+            rows += '<th>Email</th>'
+            rows += '<th>Product ID</th>'
+            rows += '<th>Delivered</th>'
+            rows += '</tr>';
+            rows += '</thead>';
+            rows += '<tbody>';
+			var inc=1;
+            for (var i in data) {
+                rows += '<tr id="' + inc + '">';
+                rows += '<td>' + inc++ + '</td>';
+                rows += '<td><span class="name">' + data[i].customerName + '</span></td>';
+                rows += '<td>' + data[i].contact;
+                rows += '</td>';
+                rows += '<td>'+ data[i].address + '</td>';
+                rows += '<td>'+ data[i].email + '</td>';
+                rows += '<td>'+ data[i].productId + '</td>';
+                if(data[i].delivered)
+	                rows += '<td>'+ '<i class="small material-icons" style="color: green">check</i>' + '</td>';
+	            else 
+	            	rows += '<td>'+ '<i class="small material-icons" style="color: red">close</i>' + '</td>';
+                rows += '</tr>';
+            }//end for
+
+            rows += '</tbody>';
+            rows += '</table>';
+            return rows;
+        }
+    </script>
+</body>
+
+</html>

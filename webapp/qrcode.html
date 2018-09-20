@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scan ID</title>
+</head>
+
+<body>
+	<nav style="background-color: black">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo center">Confirmation Page</a>
+        </div>
+    </nav>
+    <div style="text-align: center; margin-top: 150px">
+    	<video id="preview"></video>
+	    <p id="data"></p>
+	    <table align="center" class="striped" id="details" style="max-width:900px; display: none">
+        <tbody>
+          <tr>
+              <th>Name</th>
+              <td id="name"></td>
+          </tr>
+          <tr>
+            <th>Contact</th>
+            <td id="contact"></td>
+          </tr>
+          <tr>
+            <th>Address</th>
+            <td id="address"></td>
+          </tr>
+        </tbody>
+      </table>
+	    <button id="delivered" style="display:none; margin-top: 40px;" class="btn waves-effect waves-light" type="submit" name="action">Confirm Delivery
+		    <i class="material-icons right">check</i>
+		</button>
+		<h2 id="thank" style="display: none">Thank You!</h2>
+    </div>
+    <script src="instascan.min.js">
+    	
+    </script>
+    <script type="text/javascript">
+    	const apis = "https://express-blockchain.cfapps.eu10.hana.ondemand.com/";
+    	// const apis = "http://localhost:5000/";
+		
+		const headers = {
+		  Accept: "application/json"
+		};
+		
+		const getdata = (id) => 
+			fetch(`${apis}order/${id}`, {
+				headers,
+			})
+			.then(res => res.json())
+			.catch(err => console.log(err))
+
+        let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+        scanner.addListener('scan', function (content) {
+            data = JSON.parse(content);
+            console.log(data);
+            getdata(data.id).then(i=>{
+            	console.log(i);
+            	$('#name').html(i.customerName);
+            	$('#address').html(i.address);
+            	$('#contact').html(i.contact);
+            });
+            $('#preview').hide();
+            $('#delivered').show();
+            $('#details').show();
+        });
+        Instascan.Camera.getCameras().then(function (cameras) {
+            if (cameras.length > 0) {
+                try {
+                    scanner.start(cameras[0]);
+                } catch (error) {
+                    console.log(error);
+                    // scanner.start(cameras[0]);
+                }
+            } else {
+                console.error('No cameras found.');
+            }
+        }).catch(function (e) {
+            console.error(e);
+        });
+        $("#delivered").click(()=>{
+        	const headers = {
+			  Accept: "application/json"
+			};
+			
+			var api = "https://express-blockchain.cfapps.eu10.hana.ondemand.com/delivered";
+			// var api = "http://localhost:5000/delivered";
+			console.log("CLICK ID");
+			console.log(data);
+			var send = {
+				id: data.id
+			}
+			console.log(send);
+			fetch(api, {
+			    method: "POST",
+			    headers: {
+			      ...headers,
+			      "Content-Type": "application/json"
+			    },
+			    body: JSON.stringify(send)
+			  })
+			    .then(res => res.json())
+			    .then(i=>{
+			    	console.log(i);
+			    	$('#delivered').hide();
+			    	$('#thank').show();
+			    })
+			    .catch(err => console.log(err));
+        })
+    </script>
+</body>
+
+</html>

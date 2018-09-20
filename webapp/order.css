@@ -1,0 +1,48 @@
+body {
+	background-color: #eeeeee;
+}
+
+.header {
+	height: 100px;
+	background-color: #fafafa;
+	padding-bottom: 8px;
+	margin-top: 10px;
+	font-family: 'Courgette', cursive;
+	color: #424242 ;
+	text-align: center;
+}
+
+.nav-bar {
+	margin-bottom: 50px;
+	margin-top: 5px;
+	background-color: #e0e0e0;
+}
+
+.product-name {
+	font-size: 4vh;
+}
+
+.product-id {
+	font-size: 2vh;
+}
+
+.product-quantity {
+	font-size: 2vh;
+}
+
+.left-align {
+	text-align: left;
+}
+
+.image {
+	width: 24%;
+  	/*height: 150px;*/
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.right-align {
+	text-align: right;
+	padding-left: 0;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Order</title>
+	<link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="buynow.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="row">
+			<div class="col s12">
+				<div class='header'><h1 style="font-size: 8vh">Place Your Order!</h1></div>
+				<nav class="nav-bar">
+				    <div class="nav-wrapper">
+				      <a href="index.html" class="brand-logo" style="padding-left: 25px; margin-top: -10px;"><i class="material-icons" style="color: black; font-size: 1em">home</i></a>
+				      <ul class="right hide-on-med-and-down">
+				        <li></li>
+				      </ul>
+				    </div>
+				</nav>
+			</div>
+	</div>
+	<div class="container buy-now-page">
+		<div class="row">
+			<div class="grid-example col s12 m6 item"></div>
+			<div class="grid-example col s12 m6 form">
+			    <form onSubmit="formSubmission()" action="#">
+			      <div class="row">
+			        <div class="input-field col s6">
+			          <input id="first_name" type="text" class="validate">
+			          <label for="first_name">First Name</label>
+			        </div>
+			        <div class="input-field col s6">
+			          <input id="last_name" type="text" class="validate">
+			          <label for="last_name">Last Name</label>
+			        </div>
+			      </div>
+			      <div class="row">
+			        <div class="input-field col s12">
+			          <input id="email" type="email" class="validate">
+			          <label for="email">Email</label>
+			        </div>
+			      </div>
+			      <div class="row">
+			        <div class="input-field col s6">
+			          <input id="address" type="text" class="validate">
+			          <label for="address">Address</label>
+			        </div>
+			        <div class="input-field col s6">
+			          <input id="contact" type="text" class="validate">
+			          <label for="contact">Contact</label>
+			        </div>
+			      </div>
+			      <div class="row">
+			        <div class="input-field col s4">
+			          <input id="city" type="text" class="validate">
+			          <label for="city">City</label>
+			        </div>
+			        <div class="input-field col s4">
+			          <input id="state" type="text" class="validate">
+			          <label for="state">State</label>
+			        </div>
+			        <div class="input-field col s4">
+			          <input id="pincode" type="text" class="validate">
+			          <label for="pincode">Pincode</label>
+			        </div>
+			      </div>
+			       <div class="row">
+			        <div class="col s12">
+			        	<div class="place-order">
+			        		<button class="waves-effect waves-light btn" type='submit' style="background-color: #3a499e">Place Order</button>
+			        	</div>
+			        </div>
+			      </div>
+	    		</form>
+	    	</div>
+    	</div>
+	</div>
+
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.min.js"
+	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="buynow.js"></script>
+</body>
+</html>

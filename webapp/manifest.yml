@@ -1,0 +1,6 @@
+---
+applications:
+- name: frontend-app
+  buildpack: staticfile_buildpack
+  memory: 128M
+  instances: 1

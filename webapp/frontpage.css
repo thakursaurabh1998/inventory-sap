@@ -1,0 +1,58 @@
+body {
+	background-color: #b0bec5;
+}
+
+.header {
+	height: 100px;
+	background-color: #fafafa;
+	padding-bottom: 8px;
+	margin-top: 10px;
+	font-family: 'Courgette', cursive;
+	color: #424242 ;
+	text-align: center;
+}
+
+.nav-bar {
+	margin-bottom: 50px;
+	margin-top: 5px;
+	background-color: #e0e0e0;
+}
+
+.link {
+	font-size: 30px;
+	color: black;
+}
+
+.link:hover {
+	color: orange;
+}
+
+.image1 {
+	height: 250px;
+	background-image: url('http://www.eds.org.nz/assets/img/head%20and%20shoulders%20image%20male.png');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.image2 {
+	height: 250px;
+	background-image: url('https://cdn2.iconfinder.com/data/icons/transports-2/200/Untitled-12-512.png');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.image3 {
+	height: 250px;
+	background-image: url('https://png.icons8.com/ios/1600/facial-recognition-scan.png');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.image4 {
+	height: 250px;
+	background-image: url('http://cdn.onlinewebfonts.com/svg/img_208967.png');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
